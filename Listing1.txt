@@ -1,0 +1,56 @@
+Integrator = {}
+function Integrator:new(start, dt)
+    newObj = {y = start, dt = dt}
+    self.__index = self
+    return setmetatable(newObj, self)
+end
+function Integrator:call(value)
+    self.y = self.y + (value * self.dt)
+    return self.y
+end
+
+Derivative = {}
+function Derivative:new(dt)
+    newObj = {last = 0, y = 0, dt = dt}
+    self.__index = self
+    return setmetatable(newObj, self)
+end
+function Derivative:call(value)
+    self.y = (value - self.last) / self.dt
+    return self.y
+end
+
+FirstOrder = {}
+function FirstOrder:new(k, T, dt)
+    newObj = {y = 0, T = T, k = k, integrator = Integrator:new(0, dt)}
+    self.__index = self
+    return setmetatable(newObj, self)
+end
+function FirstOrder:call(u)
+    local e = (u * self.k) - self.y
+    self.y = self.integrator:call(e / self.T)
+    return self.y
+end
+
+Motor = {}
+function Motor:new(ke, R, L, dt)
+    local Tm = R / L
+    newObj = {w = 0, inner = FirstOrder:new(1 / ke, Tm, dt)}
+    self.__index = self
+    return setmetatable(newObj, self)
+end
+function Motor:call(u)
+    self.w = self.inner:call(u)
+    return self.w
+end
+
+Pid = {}
+function Pid:new(kp, ki, kd, dt)
+    newObj = {kp = kp, ki = ki, kd = kd, y = 0, derivative = Derivative:new(dt), integrator = Integrator:new(0, dt)}
+    self.__index = self
+    return setmetatable(newObj, self)
+end
+function Pid:call(u)
+    self.y = (self.kp * u) + (self.ki * self.integrator:call(u)) + (self.kd * self.derivative:call(u))
+    return self.y
+end

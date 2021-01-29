@@ -1,0 +1,94 @@
+function sysCall_init()
+Speed = 28.57;
+jointHandle1 = sim.getObjectHandle('Revolute_joint1');
+jointHandle2 = sim.getObjectHandle('Revolute_joint2');
+jointHandle3 = sim.getObjectHandle('Revolute_joint');
+jointHandle4 = sim.getObjectHandle('Revolute_joint0');
+end
+
+function sysCall_actuation()
+time = sim.getSimulationTime();
+print(time);
+if (time < 1) then
+	sim.setJointTargetVelocity(jointHandle1, Speed);
+	sim.setJointTargetVelocity(jointHandle2, Speed);
+	sim.setJointTargetVelocity(jointHandle3, Speed);
+	sim.setJointTargetVelocity(jointHandle4, Speed);
+end
+if (time >= 1 and time < 1.2) then
+    sim.setJointTargetVelocity(jointHandle1, 0);
+	sim.setJointTargetVelocity(jointHandle2, 0);
+	sim.setJointTargetVelocity(jointHandle3, 0);
+	sim.setJointTargetVelocity(jointHandle4, 0);
+end
+if (time >= 1.2 and time < 1.5568) then
+	sim.setJointTargetVelocity(jointHandle1, Speed / 2);
+	sim.setJointTargetVelocity(jointHandle2, -Speed / 2);
+	sim.setJointTargetVelocity(jointHandle3, Speed / 2);
+	sim.setJointTargetVelocity(jointHandle4, -Speed / 2);
+end
+if (time >= 1.5568 and time < 1.6568) then
+    sim.setJointTargetVelocity(jointHandle1, 0);
+	sim.setJointTargetVelocity(jointHandle2, 0);
+	sim.setJointTargetVelocity(jointHandle3, 0);
+	sim.setJointTargetVelocity(jointHandle4, 0);
+end
+if (time >= 1.6568 and time < 4.6568) then
+	sim.setJointTargetVelocity(jointHandle1, Speed);
+	sim.setJointTargetVelocity(jointHandle2, Speed);
+	sim.setJointTargetVelocity(jointHandle3, Speed);
+	sim.setJointTargetVelocity(jointHandle4, Speed);
+end
+if (time >= 4.6568 and time < 5.2568) then
+    sim.setJointTargetVelocity(jointHandle1, 0);
+	sim.setJointTargetVelocity(jointHandle2, 0);
+	sim.setJointTargetVelocity(jointHandle3, 0);
+	sim.setJointTargetVelocity(jointHandle4, 0);
+end
+if (time >= 5.2568 and time < 6.2568) then
+	sim.setJointTargetVelocity(jointHandle1, -Speed);
+	sim.setJointTargetVelocity(jointHandle2, -Speed);
+	sim.setJointTargetVelocity(jointHandle3, -Speed);
+	sim.setJointTargetVelocity(jointHandle4, -Speed);
+end
+if (time >= 6.2568 and time < 6.4568) then
+    sim.setJointTargetVelocity(jointHandle1, 0);
+	sim.setJointTargetVelocity(jointHandle2, 0);
+	sim.setJointTargetVelocity(jointHandle3, 0);
+	sim.setJointTargetVelocity(jointHandle4, 0);
+end
+if (time >= 6.4568 and time < 7.0919) then
+	sim.setJointTargetVelocity(jointHandle1, -Speed / 2);
+	sim.setJointTargetVelocity(jointHandle2, Speed / 2);
+	sim.setJointTargetVelocity(jointHandle3, -Speed / 2);
+	sim.setJointTargetVelocity(jointHandle4, Speed / 2);
+end
+if (time >= 7.0919 and time < 7.1919) then
+	sim.setJointTargetVelocity(jointHandle1, 0);
+	sim.setJointTargetVelocity(jointHandle2, 0);
+	sim.setJointTargetVelocity(jointHandle3, 0);
+	sim.setJointTargetVelocity(jointHandle4, 0);
+end
+if (time >= 7.1919 and time < 8.6059) then
+	sim.setJointTargetVelocity(jointHandle1, Speed);
+	sim.setJointTargetVelocity(jointHandle2, Speed);
+	sim.setJointTargetVelocity(jointHandle3, Speed);
+	sim.setJointTargetVelocity(jointHandle4, Speed);
+end
+if (time >= 8.6059) then
+	sim.setJointTargetVelocity(jointHandle1, 0);
+	sim.setJointTargetVelocity(jointHandle2, 0);
+	sim.setJointTargetVelocity(jointHandle3, 0);
+	sim.setJointTargetVelocity(jointHandle4, 0);
+end
+end
+
+function sysCall_sensing()
+    -- put your sensing code here
+end
+
+function sysCall_cleanup()
+    -- do some clean-up here
+end
+
+-- See the user manual or the available code snippets for additional callback functions and details
